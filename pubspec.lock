@@ -158,9 +158,9 @@ packages:
   firebase_ui_oauth:
     dependency: "direct main"
     description:
-      name: firebase_ui_oauth
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../flutterfire/packages/firebase_ui_oauth"
+      relative: true
+    source: path
     version: "1.0.4"
   flutter:
     dependency: "direct main"

@@ -7,4 +7,7 @@ abstract class OidcProviderButtonStyle extends ThemedOAuthProviderButtonStyle {
 
   @override
   String get assetsPackage => 'firebase_ui_oauth_oidc';
+
+  @override
+  String get label;
 }

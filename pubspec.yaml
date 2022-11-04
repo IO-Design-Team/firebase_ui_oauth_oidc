@@ -19,3 +19,7 @@ dev_dependencies:
     sdk: flutter
 
   rexios_lints: ^4.0.0
+
+dependency_overrides:
+  firebase_ui_oauth:
+    path: ../flutterfire/packages/firebase_ui_oauth
