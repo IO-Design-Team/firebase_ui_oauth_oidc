@@ -24,27 +24,26 @@ class OidcProvider extends OAuthProvider {
   })  : assert(providerId.startsWith('oidc.')),
         firebaseAuthProvider = fba.OAuthProvider(providerId) {
     firebaseAuthProvider.setCustomParameters(customParameters);
-    scopes.forEach(firebaseAuthProvider.addScope);
+    firebaseAuthProvider.setScopes(scopes.toList());
   }
 
   @override
-  void mobileSignIn(AuthAction action) {
+  void mobileSignIn(AuthAction action) async {
     authListener.onBeforeSignIn();
 
-    auth.signInWithProvider(firebaseAuthProvider).then((userCred) {
-      if (action == AuthAction.signIn) {
-        authListener.onSignedIn(userCred);
-      } else {
-        authListener.onCredentialLinked(userCred.credential!);
-      }
-    }).catchError((err) {
+    final fba.UserCredential credential;
+    try {
+      credential = await auth.signInWithProvider(firebaseAuthProvider);
+    } catch (err) {
       authListener.onError(err);
-    });
-  }
+      return;
+    }
 
-  @override
-  void desktopSignIn(AuthAction action) {
-    mobileSignIn(action);
+    if (action == AuthAction.signIn) {
+      authListener.onSignedIn(credential);
+    } else {
+      authListener.onCredentialLinked(credential.credential!);
+    }
   }
 
   @override
@@ -60,6 +59,11 @@ class OidcProvider extends OAuthProvider {
     return SynchronousFuture(null);
   }
 
+  /// Supported on platforms that support the official Firebase plugins
   @override
-  bool supportsPlatform(TargetPlatform platform) => true;
+  bool supportsPlatform(TargetPlatform platform) =>
+      kIsWeb ||
+      platform == TargetPlatform.iOS ||
+      platform == TargetPlatform.android ||
+      platform == TargetPlatform.macOS;
 }
