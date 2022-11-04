@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as fba;
 import 'package:flutter/foundation.dart';
 import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
-import 'theme.dart';
+import 'package:firebase_ui_oauth_oidc/src/theme.dart';
 
 /// A provider for OIDC OAuth
 class OidcProvider extends OAuthProvider {
@@ -10,7 +10,7 @@ class OidcProvider extends OAuthProvider {
   final String providerId;
 
   @override
-  final ThemedOAuthProviderButtonStyle style;
+  final OidcProviderButtonStyle style;
 
   @override
   final fba.OAuthProvider firebaseAuthProvider;
@@ -18,7 +18,7 @@ class OidcProvider extends OAuthProvider {
   /// Constructor
   OidcProvider({
     required this.providerId,
-    this.style = const OidcProviderButtonStyle(),
+    required this.style,
     Map<String, dynamic> customParameters = const {},
     Set<String> scopes = const {},
   })  : assert(providerId.startsWith('oidc.')),
