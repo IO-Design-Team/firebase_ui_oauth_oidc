@@ -15,12 +15,18 @@ class OidcProvider extends OAuthProvider {
   @override
   final fba.OAuthProvider firebaseAuthProvider;
 
+  /// A custom getter for the ID token
+  /// 
+  /// Used to provide a manual OIDC sign-in flow
+  final ValueGetter<Future<String>>? getIdToken;
+
   /// Constructor
   OidcProvider({
     required this.providerId,
     required this.style,
     Map<String, dynamic> customParameters = const {},
     Set<String> scopes = const {},
+    this.getIdToken,
   })  : assert(providerId.startsWith('oidc.')),
         firebaseAuthProvider = fba.OAuthProvider(providerId) {
     firebaseAuthProvider.setCustomParameters(customParameters);
@@ -33,7 +39,14 @@ class OidcProvider extends OAuthProvider {
 
     final fba.UserCredential credential;
     try {
-      credential = await auth.signInWithProvider(firebaseAuthProvider);
+      if (getIdToken != null) {
+        final idToken = await getIdToken!();
+        credential = await auth.signInWithCredential(
+          firebaseAuthProvider.credential(idToken: idToken),
+        );
+      } else {
+        credential = await auth.signInWithProvider(firebaseAuthProvider);
+      }
     } catch (err) {
       authListener.onError(err);
       return;
