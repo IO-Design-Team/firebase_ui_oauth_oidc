@@ -47,17 +47,17 @@ class OidcProvider extends OAuthProvider {
   }
 
   @override
+  void desktopSignIn(AuthAction action) => mobileSignIn(action);
+
+  @override
   ProviderArgs get desktopSignInArgs => throw UnimplementedError();
 
   @override
-  fba.OAuthCredential fromDesktopAuthResult(AuthResult result) {
-    throw UnimplementedError();
-  }
+  fba.OAuthCredential fromDesktopAuthResult(AuthResult result) =>
+      throw UnimplementedError();
 
   @override
-  Future<void> logOutProvider() {
-    return SynchronousFuture(null);
-  }
+  Future<void> logOutProvider() => SynchronousFuture(null);
 
   /// Supported on platforms that support the official Firebase plugins
   @override
