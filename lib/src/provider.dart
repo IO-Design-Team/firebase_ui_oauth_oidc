@@ -16,9 +16,9 @@ class OidcProvider extends OAuthProvider {
   final fba.OAuthProvider firebaseAuthProvider;
 
   /// A custom getter for the ID token
-  /// 
+  ///
   /// Used to provide a manual OIDC sign-in flow
-  final ValueGetter<Future<String>>? getIdToken;
+  final ValueGetter<Future<OidcToken>>? getToken;
 
   /// Constructor
   OidcProvider({
@@ -26,7 +26,7 @@ class OidcProvider extends OAuthProvider {
     required this.style,
     Map<String, dynamic> customParameters = const {},
     Set<String> scopes = const {},
-    this.getIdToken,
+    this.getToken,
   })  : assert(providerId.startsWith('oidc.')),
         firebaseAuthProvider = fba.OAuthProvider(providerId) {
     firebaseAuthProvider.setCustomParameters(customParameters);
@@ -39,10 +39,13 @@ class OidcProvider extends OAuthProvider {
 
     final fba.UserCredential credential;
     try {
-      if (getIdToken != null) {
-        final idToken = await getIdToken!();
+      if (getToken != null) {
+        final token = await getToken!();
         credential = await auth.signInWithCredential(
-          firebaseAuthProvider.credential(idToken: idToken),
+          firebaseAuthProvider.credential(
+            idToken: token.idToken,
+            rawNonce: token.rawNonce,
+          ),
         );
       } else {
         credential = await auth.signInWithProvider(firebaseAuthProvider);
@@ -82,4 +85,21 @@ class OidcProvider extends OAuthProvider {
       platform == TargetPlatform.iOS ||
       platform == TargetPlatform.android ||
       platform == TargetPlatform.macOS;
+}
+
+/// An intermediate OidcToken to be sent to Firebase for authentication
+class OidcToken {
+  /// The ID token
+  final String idToken;
+
+  /// The raw nonce
+  ///
+  /// See [OAuthCredential.rawNonce]
+  final String? rawNonce;
+
+  /// Constructor
+  OidcToken({
+    required this.idToken,
+    this.rawNonce,
+  });
 }
