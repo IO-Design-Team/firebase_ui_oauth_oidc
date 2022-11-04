@@ -34,7 +34,7 @@ class OidcProvider extends OAuthProvider {
   }
 
   @override
-  void mobileSignIn(AuthAction action) async {
+  void platformSignIn(TargetPlatform platform, AuthAction action) async {
     authListener.onBeforeSignIn();
 
     final fba.UserCredential credential;
@@ -60,7 +60,10 @@ class OidcProvider extends OAuthProvider {
   }
 
   @override
-  void desktopSignIn(AuthAction action) => mobileSignIn(action);
+  void mobileSignIn(AuthAction action) => throw UnimplementedError();
+
+  @override
+  void desktopSignIn(AuthAction action) => throw UnimplementedError();
 
   @override
   ProviderArgs get desktopSignInArgs => throw UnimplementedError();
