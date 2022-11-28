@@ -20,24 +20,29 @@ Enable OIDC provider on [firebase console](https://console.firebase.google.com/)
 
 ## Usage
 
+<!-- embedme readme/usage_1.dart -->
 ```dart
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_oidc.dart';
+import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
+import 'package:flutter/material.dart';
 
-void main() {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+import 'example_button_style.dart';
+import 'firebase_options.dart';
 
-    FirebaseUIAuth.configureProviders([
-        AppleProvider(),
-    ]);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-    runApp(MyApp());
+  FirebaseUIAuth.configureProviders([
+    OidcProvider(providerId: 'oidc.example', style: const ExampleButtonStyle()),
+  ]);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,40 +57,63 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 ```
 
 Alternatively you could use the `OAuthProviderButton`
 
+<!-- embedme readme/usage_2.dart -->
 ```dart
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
+import 'package:flutter/material.dart';
+
+import 'example_button_style.dart';
+
 class MyScreen extends StatelessWidget {
+  const MyScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AuthStateListener<OAuthController>(
       listener: (oldState, newState, controller) {
         if (newState is SignedIn) {
           // navigate to other screen.
+          return true;
         }
+        return false;
       },
       child: OAuthProviderButton(
-        provider: AppleProvider(),
+        provider: OidcProvider(
+          providerId: 'oidc.example',
+          style: const ExampleButtonStyle(),
+        ),
       ),
     );
   }
 }
+
 ```
 
-Also there is a standalone version of the `AppleSignInButton`
+Also there is a standalone version of the `OidcSignInButton`
 
+<!-- embedme readme/usage_3.dart -->
 ```dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
 class MyScreen extends StatelessWidget {
+  const MyScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return AppleSignInButton(
-      loadingIndicator: CircularProgressIndicator(),
+    return OidcSignInButton(
+      loadingIndicator: const CircularProgressIndicator(),
       onSignedIn: (UserCredential credential) {
         // perform navigation.
-      }
+      },
     );
   }
 }
+
 ```
