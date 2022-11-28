@@ -6,71 +6,57 @@ export 'package:firebase_ui_oauth/firebase_ui_oauth.dart'
 export 'src/provider.dart' show OidcProvider, OidcToken;
 export 'src/theme.dart' show OidcProviderButtonStyle;
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
+import 'package:flutter/widgets.dart';
+import 'package:firebase_ui_oauth/firebase_ui_oauth.dart';
 
-class AppleSignInButton extends _AppleSignInButton {
-  const AppleSignInButton({
-    Key? key,
-    required Widget loadingIndicator,
-    AuthAction? action,
-    FirebaseAuth? auth,
+/// Standalone OIDC sign-in button.
+class OidcSignInButton extends _OidcSignInButton {
+  /// Constructor
+  const OidcSignInButton({
+    super.key,
+    required super.providerId,
+    required super.style,
+    required super.loadingIndicator,
+    super.action = null,
+    super.auth,
     bool? isLoading,
-    String? label,
-    DifferentProvidersFoundCallback? onDifferentProvidersFound,
-    SignedInCallback? onSignedIn,
-    void Function()? onTap,
-    bool? overrideDefaultTapAction,
-    double? size,
-    void Function(Exception exception)? onError,
-    VoidCallback? onCanceled,
-  }) : super(
-          key: key,
-          action: action,
-          auth: auth,
-          isLoading: isLoading ?? false,
-          loadingIndicator: loadingIndicator,
-          label: label,
-          onDifferentProvidersFound: onDifferentProvidersFound,
-          onSignedIn: onSignedIn,
-          onTap: onTap,
-          overrideDefaultTapAction: overrideDefaultTapAction,
-          size: size,
-          onError: onError,
-          onCanceled: onCanceled,
-        );
+    super.label,
+    super.onDifferentProvidersFound,
+    super.onSignedIn,
+    super.onTap,
+    super.overrideDefaultTapAction,
+    super.size,
+    super.onError,
+    super.onCanceled,
+  }) : super(isLoading: isLoading ?? false);
 }
 
-class AppleSignInIconButton extends _AppleSignInButton {
-  const AppleSignInIconButton({
-    Key? key,
-    required Widget loadingIndicator,
-    AuthAction? action,
-    FirebaseAuth? auth,
+/// Standalone OIDC sign-in icon button.
+class OidcSignInIconButton extends _OidcSignInButton {
+  /// Constructor
+  const OidcSignInIconButton({
+    super.key,
+    required super.providerId,
+    required super.style,
+    required super.loadingIndicator,
+    super.action = null,
+    super.auth,
     bool? isLoading,
-    DifferentProvidersFoundCallback? onDifferentProvidersFound,
-    SignedInCallback? onSignedIn,
-    void Function()? onTap,
-    bool? overrideDefaultTapAction,
-    double? size,
-    void Function(Exception exception)? onError,
-    VoidCallback? onCanceled,
-  }) : super(
-          key: key,
-          action: action,
-          auth: auth,
-          isLoading: isLoading ?? false,
-          loadingIndicator: loadingIndicator,
-          label: '',
-          onDifferentProvidersFound: onDifferentProvidersFound,
-          onSignedIn: onSignedIn,
-          onTap: onTap,
-          overrideDefaultTapAction: overrideDefaultTapAction,
-          size: size,
-          onError: onError,
-          onCanceled: onCanceled,
-        );
+    super.onDifferentProvidersFound,
+    super.onSignedIn,
+    super.onTap,
+    super.overrideDefaultTapAction,
+    super.size,
+    super.onError,
+    super.onCanceled,
+  }) : super(isLoading: isLoading ?? false, label: '');
 }
 
-class _AppleSignInButton extends StatelessWidget {
+class _OidcSignInButton extends StatelessWidget {
+  final String providerId;
+  final OidcProviderButtonStyle style;
   final String label;
   final Widget loadingIndicator;
   final void Function()? onTap;
@@ -88,8 +74,10 @@ class _AppleSignInButton extends StatelessWidget {
   final void Function(Exception exception)? onError;
   final VoidCallback? onCanceled;
 
-  const _AppleSignInButton({
-    Key? key,
+  const _OidcSignInButton({
+    super.key,
+    required this.providerId,
+    required this.style,
     required this.loadingIndicator,
     String? label,
     bool? overrideDefaultTapAction,
@@ -102,12 +90,12 @@ class _AppleSignInButton extends StatelessWidget {
     double? size,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with Apple',
+  })  : label = label ?? 'Sign in with OIDC',
         overrideDefaultTapAction = overrideDefaultTapAction ?? false,
-        size = size ?? 19,
-        super(key: key);
+        size = size ?? 19;
 
-  AppleProvider get provider => AppleProvider();
+  OidcProvider get provider =>
+      OidcProvider(providerId: providerId, style: style);
 
   @override
   Widget build(BuildContext context) {
