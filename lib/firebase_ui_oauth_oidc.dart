@@ -21,7 +21,7 @@ class OidcSignInButton extends _OidcSignInButton {
     required super.loadingIndicator,
     super.action = null,
     super.auth,
-    bool? isLoading,
+    super.isLoading,
     super.label,
     super.onDifferentProvidersFound,
     super.onSignedIn,
@@ -30,7 +30,7 @@ class OidcSignInButton extends _OidcSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(isLoading: isLoading ?? false);
+  });
 }
 
 /// Standalone OIDC sign-in icon button.
@@ -43,7 +43,7 @@ class OidcSignInIconButton extends _OidcSignInButton {
     required super.loadingIndicator,
     super.action = null,
     super.auth,
-    bool? isLoading,
+    super.isLoading,
     super.onDifferentProvidersFound,
     super.onSignedIn,
     super.onTap,
@@ -51,7 +51,7 @@ class OidcSignInIconButton extends _OidcSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(isLoading: isLoading ?? false, label: '');
+  }) : super(label: '');
 }
 
 class _OidcSignInButton extends StatelessWidget {
