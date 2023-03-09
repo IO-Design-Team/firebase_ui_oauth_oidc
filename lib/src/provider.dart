@@ -48,7 +48,11 @@ class OidcProvider extends OAuthProvider {
           ),
         );
       } else {
-        credential = await auth.signInWithProvider(firebaseAuthProvider);
+        if (kIsWeb) {
+          credential = await auth.signInWithPopup(firebaseAuthProvider);
+        } else {
+          credential = await auth.signInWithProvider(firebaseAuthProvider);
+        }
       }
     } catch (err) {
       authListener.onError(err);
