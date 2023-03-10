@@ -23,7 +23,7 @@ jobs:
       - name: Embedme
         run: |
           npm install embedme
-          npx embedme README.md --verify
+          npx embedme **/*.md --verify
       # - name: Build runner
       #   run: |
       #     flutter pub run build_runner build --delete-conflicting-outputs
