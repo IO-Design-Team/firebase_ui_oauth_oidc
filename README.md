@@ -99,7 +99,6 @@ Also there is a standalone version of the `OidcSignInButton`
 
 <!-- embedme readme/usage_3.dart -->
 ```dart
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
 import 'package:flutter/material.dart';
 
@@ -114,7 +113,7 @@ class MyScreen extends StatelessWidget {
       providerId: 'oidc.example',
       style: const ExampleButtonStyle(),
       loadingIndicator: const CircularProgressIndicator(),
-      onSignedIn: (UserCredential credential) {
+      onSignedIn: (credential) {
         // perform navigation.
       },
     );
