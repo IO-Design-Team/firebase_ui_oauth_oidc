@@ -47,6 +47,8 @@ class OidcProvider extends OAuthProvider {
             rawNonce: token.rawNonce,
           ),
         );
+      } else if (kIsWeb) {
+        credential = await auth.signInWithPopup(firebaseAuthProvider);
       } else {
         credential = await auth.signInWithProvider(firebaseAuthProvider);
       }
