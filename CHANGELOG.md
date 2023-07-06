@@ -1,3 +1,6 @@
+## 0.2.2
+- Adds functional style example to README.md
+
 ## 0.2.1
 - Uses `signInWithPopup` on web [#2](https://github.com/IO-Design-Team/firebase_ui_oauth_oidc/pull/2)
 
