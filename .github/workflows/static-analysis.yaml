@@ -17,9 +17,9 @@ jobs:
       - name: Pub get
         run: flutter pub get
       - name: Format
-        run: flutter format . --set-exit-if-changed
+        run: dart format . --set-exit-if-changed
       - name: Analyze
-        run: flutter analyze
+        run: dart analyze
       - name: Embedme
         run: |
           npm install embedme
@@ -30,5 +30,5 @@ jobs:
       #     git diff --exit-code
       - name: Pana
         run: |
-          flutter pub global activate pana
+          dart pub global activate pana
           pana --no-warning --exit-code-threshold 0
