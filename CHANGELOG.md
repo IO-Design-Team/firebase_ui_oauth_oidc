@@ -1,3 +1,6 @@
+## 0.2.3
+- Changes `customParameters` to be a `Map<String, String>` to match the auth package
+
 ## 0.2.2
 - Adds functional style example to README.md
 

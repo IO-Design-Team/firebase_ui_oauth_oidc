@@ -24,7 +24,7 @@ class OidcProvider extends OAuthProvider {
   OidcProvider({
     required this.providerId,
     required this.style,
-    Map<String, dynamic> customParameters = const {},
+    Map<String, String> customParameters = const {},
     Set<String> scopes = const {},
     this.getToken,
   })  : assert(providerId.startsWith('oidc.')),
