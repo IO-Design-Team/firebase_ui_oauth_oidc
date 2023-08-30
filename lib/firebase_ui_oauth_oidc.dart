@@ -22,7 +22,6 @@ class OidcSignInButton extends _OidcSignInButton {
     super.action = null,
     super.auth,
     super.isLoading,
-    super.label,
     super.onDifferentProvidersFound,
     super.onSignedIn,
     super.onTap,
@@ -51,13 +50,12 @@ class OidcSignInIconButton extends _OidcSignInButton {
     super.size,
     super.onError,
     super.onCanceled,
-  }) : super(label: '');
+  });
 }
 
 class _OidcSignInButton extends StatelessWidget {
   final String providerId;
   final OidcProviderButtonStyle style;
-  final String label;
   final Widget loadingIndicator;
   final void Function()? onTap;
   final bool overrideDefaultTapAction;
@@ -79,7 +77,6 @@ class _OidcSignInButton extends StatelessWidget {
     required this.providerId,
     required this.style,
     required this.loadingIndicator,
-    String? label,
     bool? overrideDefaultTapAction,
     this.onTap,
     this.isLoading = false,
@@ -90,8 +87,7 @@ class _OidcSignInButton extends StatelessWidget {
     double? size,
     this.onError,
     this.onCanceled,
-  })  : label = label ?? 'Sign in with OIDC',
-        overrideDefaultTapAction = overrideDefaultTapAction ?? false,
+  })  : overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
   OidcProvider get provider =>
@@ -101,7 +97,7 @@ class _OidcSignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OAuthProviderButtonBase(
       provider: provider,
-      label: label,
+      label: style.label,
       onTap: onTap,
       loadingIndicator: loadingIndicator,
       isLoading: isLoading,

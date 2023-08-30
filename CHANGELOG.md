@@ -1,3 +1,6 @@
+## 0.2.4
+- Use label from style for standalone button
+
 ## 0.2.3
 - Changes `customParameters` to be a `Map<String, String>` to match the auth package
 
