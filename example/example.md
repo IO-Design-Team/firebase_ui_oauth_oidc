@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         actions: [
           AuthStateChangeAction<SignedIn>((context, state) {
             // redirect to other screen
-          })
+          }),
         ],
       ),
     );
