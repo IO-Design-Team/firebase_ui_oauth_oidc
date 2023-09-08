@@ -1,3 +1,6 @@
+## 0.2.5
+- Call `onCancelled` when the user cancels the sign in flow
+
 ## 0.2.4
 - Use label from style for standalone button
 

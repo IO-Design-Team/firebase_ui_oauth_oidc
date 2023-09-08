@@ -52,8 +52,16 @@ class OidcProvider extends OAuthProvider {
       } else {
         credential = await auth.signInWithProvider(firebaseAuthProvider);
       }
-    } catch (err) {
-      authListener.onError(err);
+    } on fba.FirebaseAuthException catch (e) {
+      if (e.message == 'The interaction was cancelled by the user.') {
+        authListener.onCanceled();
+        return;
+      }
+
+      authListener.onError(e);
+      return;
+    } catch (e) {
+      authListener.onError(e);
       return;
     }
 

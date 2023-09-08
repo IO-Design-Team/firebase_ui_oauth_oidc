@@ -90,13 +90,10 @@ class _OidcSignInButton extends StatelessWidget {
   })  : overrideDefaultTapAction = overrideDefaultTapAction ?? false,
         size = size ?? 19;
 
-  OidcProvider get provider =>
-      OidcProvider(providerId: providerId, style: style);
-
   @override
   Widget build(BuildContext context) {
     return OAuthProviderButtonBase(
-      provider: provider,
+      provider: OidcProvider(providerId: providerId, style: style),
       label: style.label,
       onTap: onTap,
       loadingIndicator: loadingIndicator,
