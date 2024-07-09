@@ -1,6 +1,6 @@
 name: firebase_ui_oauth_oidc
 description: Firebase UI widget for authentication through OAuth2/OIDC providers
-version: 0.2.5
+version: 0.2.6
 homepage: https://github.com/IO-Design-Team/firebase_ui_oauth_oidc
 
 environment:
@@ -11,13 +11,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_auth: ^4.1.1
+  firebase_auth: ^5.1.2
   firebase_ui_oauth: ^1.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  rexios_lints: ^6.0.1
-  firebase_core: ^2.3.0
+  rexios_lints: ^7.0.0
+  firebase_core: ^3.2.0
   firebase_ui_auth: ^1.1.0

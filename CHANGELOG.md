@@ -1,3 +1,6 @@
+## 0.2.6
+- Upgrades `firebase_auth`
+
 ## 0.2.5
 - Call `onCancelled` when the user cancels the sign in flow
 
