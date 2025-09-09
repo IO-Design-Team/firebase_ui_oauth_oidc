@@ -98,6 +98,7 @@ class OidcProvider extends OAuthProvider {
 }
 
 /// An intermediate OidcToken to be sent to Firebase for authentication
+@immutable
 class OidcToken {
   /// The ID token
   final String idToken;
@@ -108,7 +109,7 @@ class OidcToken {
   final String? rawNonce;
 
   /// Constructor
-  OidcToken({
+  const OidcToken({
     required this.idToken,
     this.rawNonce,
   });
