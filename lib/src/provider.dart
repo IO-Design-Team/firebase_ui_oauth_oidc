@@ -39,9 +39,9 @@ class OidcProvider extends OAuthProvider {
 
     final fba.UserCredential credential;
     try {
-      final getToken = this.getToken;
-      if (getToken != null) {
-        final token = await getToken();
+      final readToken = getToken;
+      if (readToken != null) {
+        final token = await readToken();
         credential = await auth.signInWithCredential(
           firebaseAuthProvider.credential(
             idToken: token.idToken,
