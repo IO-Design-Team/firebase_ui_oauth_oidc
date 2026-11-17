@@ -39,8 +39,9 @@ class OidcProvider extends OAuthProvider {
 
     final fba.UserCredential credential;
     try {
+      final getToken = this.getToken;
       if (getToken != null) {
-        final token = await getToken!();
+        final token = await getToken();
         credential = await auth.signInWithCredential(
           firebaseAuthProvider.credential(
             idToken: token.idToken,
@@ -67,9 +68,21 @@ class OidcProvider extends OAuthProvider {
 
     if (action == AuthAction.signIn) {
       authListener.onSignedIn(credential);
-    } else {
-      authListener.onCredentialLinked(credential.credential!);
+      return;
     }
+
+    final oauthCredential = credential.credential;
+    if (oauthCredential == null) {
+      authListener.onError(
+        fba.FirebaseAuthException(
+          code: 'missing-credential',
+          message: 'Firebase did not return a credential to link.',
+        ),
+      );
+      return;
+    }
+
+    authListener.onCredentialLinked(oauthCredential);
   }
 
   @override

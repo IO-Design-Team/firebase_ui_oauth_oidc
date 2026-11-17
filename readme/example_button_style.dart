@@ -1,5 +1,5 @@
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _backgroundColor = ThemedColor(Colors.black, Colors.white);
 const _color = ThemedColor(Colors.white, Colors.black);

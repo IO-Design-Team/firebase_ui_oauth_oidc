@@ -1,5 +1,5 @@
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'example_button_style.dart';
 
