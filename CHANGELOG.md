@@ -1,3 +1,8 @@
+## 0.3.0
+
+- Upgrades `firebase_auth` to `7.0.0`
+- Upgrades `firebase_ui_oauth` to `3.0.0`
+
 ## 0.2.7
 
 - Upgrades `firebase_auth` to `6.0.0`
