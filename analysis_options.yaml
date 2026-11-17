@@ -1,1 +1,8 @@
 include: package:rexios_lints/flutter/package_extra.yaml
+
+analyzer:
+  errors:
+    # rexios_lints 15 still registers custom_lint through the legacy plugin
+    # API. Dart 3.14 warns about that, which fails `dart analyze` in CI.
+    # Pana runs with `--no-plugins` and does not score this file.
+    included_file_warning: ignore

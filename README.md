@@ -25,7 +25,7 @@ Enable OIDC provider on [firebase console](https://console.firebase.google.com/)
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'example_button_style.dart';
 import 'firebase_options.dart';
@@ -66,7 +66,7 @@ Alternatively you could use the `OAuthProviderButton`
 ```dart
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'example_button_style.dart';
 
@@ -100,7 +100,7 @@ Also there is a standalone version of the `OidcSignInButton`
 <!-- embedme readme/usage_3.dart -->
 ```dart
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'example_button_style.dart';
 
@@ -129,7 +129,7 @@ Create a custom style for the OIDC button
 <!-- embedme readme/example_button_style.dart -->
 ```dart
 import 'package:firebase_ui_oauth_oidc/firebase_ui_oauth_oidc.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _backgroundColor = ThemedColor(Colors.black, Colors.white);
 const _color = ThemedColor(Colors.white, Colors.black);
